@@ -1,1 +1,1 @@
-find . -type file -name "*~" -or -name "#*#"
+find . -type file -name "*~" -delete -print -or -name "#*#" -delete -print

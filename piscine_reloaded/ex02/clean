@@ -1,1 +1,0 @@
-find . -type file -name "*~" -delete -print -or -name "#*#" -delete -print

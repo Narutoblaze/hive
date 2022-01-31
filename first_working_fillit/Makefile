@@ -6,14 +6,14 @@
 #    By: raho <raho@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 18:25:17 by raho              #+#    #+#              #
-#    Updated: 2022/01/24 15:48:50 by raho             ###   ########.fr        #
+#    Updated: 2022/01/26 11:46:49 by raho             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = fillit.c main.c
+SRCS = fillit.c main.c error_check.c solve_square.c
 
 all: $(NAME)
 

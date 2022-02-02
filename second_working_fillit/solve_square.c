@@ -38,6 +38,7 @@ static char	**new_square(t_tlist *head, int size)
 			exit (8);
 		}
 		ft_memset(square[index], '.', size);
+		square[index][size] = '\0';
 		index++;
 	}
 	square[index] = 0;

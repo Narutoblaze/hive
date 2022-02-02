@@ -47,6 +47,10 @@ static char	**new_square(t_tlist *head)
 	return (square);
 }
 
+/* Every time the function is called, it increases the width and the
+** height of the dot square inside that's inside the 2D array grid.
+*/
+
 static void	enlargen_square(char **square)
 {
 	static int	size;

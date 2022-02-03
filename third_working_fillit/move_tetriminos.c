@@ -6,7 +6,7 @@
 /*   By: raho <raho@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:44:34 by raho              #+#    #+#             */
-/*   Updated: 2022/02/02 02:23:42 by raho             ###   ########.fr       */
+/*   Updated: 2022/02/03 23:55:39 by raho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,18 @@ static void	move_left(t_tlist *elem)
 void	move_tetriminos(t_tlist *head)
 {
 	t_tlist	*temp;
+	int	count;
 
 	temp = head;
+	count = 0;
 	while (temp->next != NULL)
 	{
 		while (check_up(temp))
 			move_up(temp);
 		while (check_left(temp))
 			move_left(temp);
+		count++;
 		temp = temp->next;
 	}
-	solve_square(head);
+	solve_square(head, count);
 }

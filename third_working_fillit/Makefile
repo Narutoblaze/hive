@@ -6,7 +6,7 @@
 #    By: raho <raho@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/04 18:25:17 by raho              #+#    #+#              #
-#    Updated: 2022/02/02 02:20:15 by raho             ###   ########.fr        #
+#    Updated: 2022/02/04 00:19:14 by raho             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS = main.c copy_tetriminos.c check_errors.c move_tetriminos.c solve_square.c 
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -L./libft -lft -g
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -L./libft -lft
 
 clean:
 

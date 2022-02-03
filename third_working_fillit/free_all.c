@@ -6,7 +6,7 @@
 /*   By: raho <raho@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:44:34 by raho              #+#    #+#             */
-/*   Updated: 2022/02/01 00:10:06 by raho             ###   ########.fr       */
+/*   Updated: 2022/02/03 22:43:52 by raho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_square(char **square)
 	int	index;
 
 	index = 0;
-	while (index < 11)
+	while (index < 27)
 	{
 		free(square[index]);
 		index++;

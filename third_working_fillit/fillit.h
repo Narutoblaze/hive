@@ -6,7 +6,7 @@
 /*   By: raho <raho@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:44:44 by raho              #+#    #+#             */
-/*   Updated: 2022/01/26 14:00:56 by raho             ###   ########.fr       */
+/*   Updated: 2022/02/03 22:31:04 by raho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_tlist
 void	handle_fd(char *file);
 void	check_errors(t_tlist *head, int gnl);
 void	move_tetriminos(t_tlist *head);
-void	solve_square(t_tlist *head);
+void	solve_square(t_tlist *head, int count);
 void	free_list(t_tlist *head);
 void	free_square(char **square);
 void	free_all(t_tlist *head, char **square);

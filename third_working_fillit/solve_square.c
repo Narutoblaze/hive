@@ -6,11 +6,31 @@
 /*   By: raho <raho@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 11:44:34 by raho              #+#    #+#             */
-/*   Updated: 2022/02/02 02:27:19 by raho             ###   ########.fr       */
+/*   Updated: 2022/02/03 23:58:07 by raho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+static int	round_up(float nb)
+{
+	return (nb + 0.999999999999999);
+}
+
+static int	sqrt(int nb)
+{
+	float	sqrt;
+	float	temp;
+
+	sqrt = nb / 2;
+	temp = 0;
+	while (sqrt != temp)
+	{
+		temp = sqrt;
+		sqrt = (nb/temp + temp) / 2;
+	}
+	return (round_up(sqrt));
+}
 
 /* Creates a 2D array grid for the square. Its size is 10x10 and there will be
 ** 2x2 square of dots in the top-left corner of it, other places will be
@@ -18,29 +38,28 @@
 ** calls to free all dynamically allocated memories and exits with error codes.
 */
 
-static char	**new_square(t_tlist *head)
+static char	**new_square(t_tlist *head, int smallest_size)
 {
-	int			index;
-	char		**square;
+	int	index;
+	char	**square;
 
 	index = 0;
-	square = (char **)malloc(sizeof(char *) * 11);
+	square = (char **)malloc(sizeof(char *) * 27);
 	if (square == NULL)
 	{
 		free_list(head);
 		exit (7);
 	}
-	while (index < 10)
+	while (index < 26)
 	{
-		
-		square[index] = ft_memalloc(11);
+		square[index] = ft_memalloc(27);
 		if (square[index] == NULL)
 		{
 			free_all(head, square);
 			exit (8);
 		}
-		if (index < 2)
-			ft_memset(square[index], '.', 2);
+		if (index < smallest_size)
+			ft_memset(square[index], '.', smallest_size);
 		index++;
 	}
 	square[index] = 0;
@@ -118,7 +137,8 @@ static int	place(char **square, t_tlist *elem, int row, int col)
 		{
 			if (square[srow] == NULL || square[srow][scol] == '\0')
 			{
-				remove_piece(square, elem);
+				if (counter != 0)
+					remove_piece(square, elem);
 				return (0);
 			}
 			if (square[srow][scol] == '.' && elem->tetrimino[hrow][hcol] == elem->letter)
@@ -132,7 +152,8 @@ static int	place(char **square, t_tlist *elem, int row, int col)
 			}
 			else if ((square[srow][scol] != '.' && elem->tetrimino[hrow][hcol] == elem->letter) || square[srow][scol] == '\0')
 			{
-				remove_piece(square, elem);
+				if (counter != 0)
+					remove_piece(square, elem);
 				return (0);
 			}
 			hcol++;
@@ -167,7 +188,7 @@ static int	fillit(char **square, t_tlist *head)
 		{
 			if (place(square, head, row, col))  // Checks the spot and places if possible. Returns true if succesful, false if not
 			{
-				if (head->next != NULL)
+				if (head->next->next != NULL)
 				{
 					if (fillit(square, head->next))  // Calls for the function again to do the rest of the pieces
 						return (1);
@@ -192,13 +213,16 @@ static int	fillit(char **square, t_tlist *head)
 ** Prints the solved square to the standard output.
 */
 
-void	solve_square(t_tlist *head)
+void	solve_square(t_tlist *head, int count)
 {
-	int			index;
-	char		**square;
+	int	index;
+	char	**square;
+	int	smallest_size;
 
 	index = 0;
-	square = new_square(head);
+	count = count * 4;
+	smallest_size = sqrt(count);
+	square = new_square(head, smallest_size);
 	while (fillit(square, head) == 0)
 		enlargen_square(square);
 	while (square[index] != NULL && square[index][0] != '\0')
